@@ -18,13 +18,14 @@ sapply(dat,class)
 dim(dat)
 
 #4 - Code that produces a summary of the number of scales punctured for each species
-dat %>% count(species)
+dat %>% count(species, name="# of scales punctured")
 
 #5 - Code that produces a summary of the number of specimens sampled for each species
 species <- levels(as.factor(dat$species))
 dat %>% 
   count(species,specimen) %>%
-  count(species,name = "n.specimens")
+  count(species,name = "# of specimens")
+
 
 #6 - Code that produces a PDF file containing 6 figures, one for each species that includes a box plot of puncture force versus quadrant
 pdf(file= "Lau Project1 Plots.pdf")
@@ -34,4 +35,4 @@ for(i in species){
     ggplot()+geom_boxplot(aes(x=quadrant,y=N))+ggtitle(i)
   print(p)
 }
-dev.off() 
+dev.off()
