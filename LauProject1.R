@@ -26,7 +26,6 @@ dat %>%
   count(species,specimen) %>%
   count(species,name = "# of specimens")
 
-
 #6 - Code that produces a PDF file containing 6 figures, one for each species that includes a box plot of puncture force versus quadrant
 pdf(file= "Lau Project1 Plots.pdf")
 for(i in species){
