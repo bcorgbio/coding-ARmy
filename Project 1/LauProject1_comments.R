@@ -8,9 +8,15 @@ suppressMessages(
   }
 )
 
+
+#CPK: No need set the working directory when working in an R project.
+
+
 #1 - dat variable containing the scales data set
 dat <- read.csv("scales.csv")
  
+#CPK: How can I load data that aren't in the repo? Had to add so this will run. [-2]. 
+
 #2 - a line of code that reports the class of each column in the data set
 sapply(dat,class)
 
@@ -35,3 +41,6 @@ for(i in species){
   print(p)
 }
 dev.off()
+
+#CPK: Well done over all. Just rember to provide all the data you need run your code.
+
