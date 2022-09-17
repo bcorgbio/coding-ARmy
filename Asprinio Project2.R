@@ -6,7 +6,6 @@ pseed <- read_csv("pseed.fin.amps.csv")
 pseed.bl <- read_csv("pseed.lengths.csv")
 speeds <- read_csv("pseed.calibration.csv")
   # download data sets
-  # ***make sure these are in the coding-aRmy repo in github!!
 
 #1 establish pseed.wide data tibble
 
