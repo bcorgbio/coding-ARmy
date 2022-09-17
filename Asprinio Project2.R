@@ -83,13 +83,3 @@ pseed.sum.max <- pseed.sum.max %>%
 
 pseed.sum.max %>%
   ggplot(aes(x=amp.met.rate,y=amp.sum.mean,col=fish))+geom_point()+geom_smooth(method="lm")+geom_errorbar(aes(ymin=amp.sum.mean-amp.sum.se, ymax=amp.sum.mean+amp.sum.se), width=0.05, colour="black")+theme_classic()
-
-
-
-
-
-
-
-
-
-
