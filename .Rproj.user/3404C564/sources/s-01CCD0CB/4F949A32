@@ -1,7 +1,7 @@
 {
     "id": "4F949A32",
-    "path": "~/Desktop/ecuador stuff/coding-ARmy/Asprinio Project2.R",
-    "project_path": "Asprinio Project2.R",
+    "path": "~/Desktop/ecuador stuff/coding-ARmy/Asprinio Project 2.R",
+    "project_path": "Asprinio Project 2.R",
     "type": "r_source",
     "hash": "1074969904",
     "contents": "",
@@ -17,11 +17,11 @@
         "scrollLine": "65"
     },
     "folds": "",
-    "lastKnownWriteTime": 1663536612,
+    "lastKnownWriteTime": 1663536897,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1663536612575,
+    "last_content_update": 1663536897290,
     "read_only": false,
     "read_only_alternatives": []
 }
