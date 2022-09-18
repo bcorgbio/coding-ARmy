@@ -1,4 +1,4 @@
-# Module 2 Project - JUSTIN
+# Module 2 Project - JUSTIN LAU
 
 # Libraries ---------------------------------------------------------------
 suppressMessages(
