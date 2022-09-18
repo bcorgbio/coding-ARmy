@@ -7,7 +7,7 @@ install.packages("features")
 suppressMessages(
   {library(ggplot2)
     library(tidyverse)
-    library(features))
+    library(features)
   })
 
 # Data --------------------------------------------------------------------
