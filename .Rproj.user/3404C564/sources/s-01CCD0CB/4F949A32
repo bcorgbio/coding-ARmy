@@ -3,7 +3,7 @@
     "path": "~/Desktop/ecuador stuff/coding-ARmy/Asprinio Project 2.R",
     "project_path": "Asprinio Project 2.R",
     "type": "r_source",
-    "hash": "1074969904",
+    "hash": "3409452393",
     "contents": "",
     "dirty": false,
     "created": 1663342546675.0,
@@ -14,14 +14,14 @@
         "source_window_id": "",
         "Source": "Source",
         "cursorPosition": "84,0",
-        "scrollLine": "65"
+        "scrollLine": "69"
     },
     "folds": "",
-    "lastKnownWriteTime": 1663536897,
+    "lastKnownWriteTime": 1663539091,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1663536897290,
+    "last_content_update": 1663539091337,
     "read_only": false,
     "read_only_alternatives": []
 }

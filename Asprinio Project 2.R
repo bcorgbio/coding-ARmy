@@ -5,6 +5,7 @@ library(features)
 pseed <- read_csv("pseed.fin.amps.csv")
 pseed.bl <- read_csv("pseed.lengths.csv")
 speeds <- read_csv("pseed.calibration.csv")
+pseed.met.rate <- read_csv("pseed.met.rate.csv")
   # download data sets
 
 #1 establish pseed.wide data tibble
@@ -37,13 +38,13 @@ find.peaks <- function(x,y,mult=100){ #define the functions parameter/inputs:x,y
   return(f$peaks) # return the peaks from tibble
 }
 pseed.max <- pseed.wide%>%
-  group_by(fish,speed)%>%
+  group_by(fish,bl.s)%>%
   mutate(peak=frame %in% find.peaks(frame,amp.sum))%>% # using the func we made
   filter(peak==T) #new filter
   # looking at all the data so just taking out the parts that are peaks to simplify it
 
 pseed.sum.max <- pseed.max %>%
-  group_by(fish,speed)%>% # grouped by fish and speed
+  group_by(fish,bl.s)%>% # grouped by fish and speed
   summarize(amp.sum.mean=mean(amp.sum)) %>%
   print()
 
@@ -58,27 +59,26 @@ calc.se <- function(x) {
 }
 
 pseed.sum.se <- pseed.max%>%
-  group_by(fish,speed)%>%
+  group_by(fish,bl.s)%>%
   summarize(amp.sum.se = calc.se(amp.sum)) # new column based on standard errors of amp sums vs means
 pseed.sum.max <- pseed.sum.max %>%
-  left_join(pseed.sum.se, by = c("speed","fish")) # adding column from other table to here
+  left_join(pseed.sum.se, by = c("bl.s","fish")) # adding column from other table to here
 
 #4 plot of amp.sum.mean vs speed with error bars
 
-pseed.sum.max %>%ggplot(aes(x=speed, y=amp.sum.mean, col = fish)) + geom_point(size=2) + geom_errorbar(aes(ymin=amp.sum.mean-amp.sum.se, ymax=amp.sum.mean+amp.sum.se), width = 0.05, size = 0.5)+geom_smooth(method="lm")+theme_classic()
+pseed.sum.max %>%ggplot(aes(x=bl.s, y=amp.sum.mean, col = fish)) + geom_point(size=2) + geom_errorbar(aes(ymin=amp.sum.mean-amp.sum.se, ymax=amp.sum.mean+amp.sum.se), width = 0.05, size = 0.5)+geom_smooth(method="lm")+theme_classic()
 
 #5 merge new data with pseed.sum.max
 
-pseed.met.rate <- read_csv("pseed.met.rate.csv")
-pseed.max <- pseed.max%>%
-  merge(pseed.met.rate,by=c("fish","date","m.s","cm.s","bl.s"))
-pseed.mean.rate <- pseed.max %>%
-  group_by(fish, speed)%>%
-  summarize(amp.met.rate=mean(met.rate))
-pseed.sum.max <- pseed.sum.max %>%
-  left_join(pseed.mean.rate, by = c("speed","fish"))
+pseed.met.sum <- pseed.met.rate%>%
+  group_by(fish,bl.s)%>%
+  summarize(met.mean=mean(met.rate),
+            met.se=calc.se(met.rate))
+pseed.sum.max <- pseed.sum.max%>%
+  left_join(pseed.met.sum)%>%
+  group_by(fish,bl.s)
 
 #6 plot of metabolic power output of each fish vs. mean maximum of amp.sum
 
 pseed.sum.max %>%
-  ggplot(aes(x=amp.met.rate,y=amp.sum.mean,col=fish))+geom_point()+geom_smooth(method="lm")+geom_errorbar(aes(ymin=amp.sum.mean-amp.sum.se, ymax=amp.sum.mean+amp.sum.se), width=0.05, colour="black")+theme_classic()
+  ggplot(aes(x=amp.sum.mean,y=met.mean,col=fish))+geom_point()+geom_smooth(method="lm")+geom_errorbar(aes(ymin=met.mean-met.se,ymax= met.mean+met.se), width=0.005, size=.5)+theme_classic()
