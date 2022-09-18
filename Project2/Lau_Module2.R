@@ -1,8 +1,5 @@
 # Module 2 Project - JUSTIN
 
-# Install Packages --------------------------------------------------------
-install.packages("features")
-
 # Libraries ---------------------------------------------------------------
 suppressMessages(
   {library(ggplot2)
