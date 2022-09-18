@@ -8,7 +8,6 @@ suppressMessages(
   {library(ggplot2)
     library(tidyverse)
     library(features)
-    library(features)
     setwd("~/Desktop/Methods/Project2/")
   })
 
