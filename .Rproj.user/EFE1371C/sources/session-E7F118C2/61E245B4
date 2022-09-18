@@ -1,0 +1,26 @@
+{
+    "id": "61E245B4",
+    "path": "~/Desktop/Methods/coding-ARmy/Lau_Module2.R",
+    "project_path": "Lau_Module2.R",
+    "type": "r_source",
+    "hash": "2937657621",
+    "contents": "",
+    "dirty": false,
+    "created": 1663424252688.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "72,52",
+        "scrollLine": "27"
+    },
+    "folds": "2|19|4|0|\n5|12|13|0|\n14|7|18|0|\n19|25|29|21|\n30|47|48|2|\n31|37|37|0|\n49|65|59|0|\n50|18|52|0|\n60|50|63|219|\n",
+    "lastKnownWriteTime": 1663513633,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1663513707511,
+    "read_only": false,
+    "read_only_alternatives": []
+}
