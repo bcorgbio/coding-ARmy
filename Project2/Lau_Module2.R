@@ -7,8 +7,7 @@ install.packages("features")
 suppressMessages(
   {library(ggplot2)
     library(tidyverse)
-    library(features)
-    setwd("~/Desktop/Methods/Project2/")
+    library(features))
   })
 
 # Data --------------------------------------------------------------------
