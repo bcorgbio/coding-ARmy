@@ -13,16 +13,14 @@ pseed.bl <- read_csv("pseed.lengths.csv")
 speeds <- read_csv("pseed.calibration.csv")
 
 # 1. Establish pseed.wide--------------------------------------------------
-pseed2 <- pseed%>%
-  left_join(speeds,by=c("speed"="vol"))
-pseed2 <- pseed2%>%
-  left_join(pseed.bl,by="fish")
-pseed2 <- pseed2%>%
-  mutate(bl.s=cm.s/bl)
-pseed.wide <- pseed2 %>%
+pseed.wide <- pseed %>%
+  left_join(speeds,by=c("speed"="vol"))%>%
+  left_join(pseed.bl,by="fish")%>%
+  mutate(bl.s=cm.s/bl)%>%
   select(-amp)%>%
   pivot_wider(names_from = fin,values_from = amp.bl) %>%
   mutate(amp.sum=L+R)
+
 # 2. Compute mean maximum* of all the amp.sums ----------------------------
 find.peaks <- function(x,y,mult=100){ 
   f <- fget(features(x = x,y=y*mult))[2:3]%>% 
