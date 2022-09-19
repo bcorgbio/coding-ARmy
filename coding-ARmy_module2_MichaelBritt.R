@@ -10,7 +10,7 @@ pseed.bl <- read_csv("pseed.lengths.csv")
 speeds <- read_csv("pseed.calibration.csv")
 pseed.met.rate <- read_csv("pseed.met.rate.csv")
 
-setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Coding-ARmy")
+#setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Coding-ARmy")
 #not necessary for submitting this assignment
 
 #1. Establishing the pseed.wide data tibble.
