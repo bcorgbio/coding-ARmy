@@ -49,8 +49,7 @@ anole.lm.pd <- lm(HTotal+SVL~ArbPD, anole.log)
 
 # 4. Use a BM model of trait evolution and construct phylogenetic least squares models --------
   anole.tree <- read.tree("anole.tre")
-  plot(anole.tree,cex=0.4)
-    
+
   # A PGLS model with the hindlimb-SVL relationship + perch height
     pgls.BM.ph <- gls(HTotal~SVL + PH, 
                       correlation = corBrownian(1, phy = anole.tree, form =~Species), 
