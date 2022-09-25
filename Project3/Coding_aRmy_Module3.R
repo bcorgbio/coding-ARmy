@@ -10,7 +10,8 @@
   library(phytools)
   library(viridis)
   library(MuMIn)
-  library(phangorn)})
+  library(phangorn)
+  library(cowplot)})
 
 # Load Data ---------------------------------------------------------------
   anole <- read_csv("anole.dat.csv")
@@ -24,9 +25,6 @@
     mutate_at(c("SVL", "HTotal","PH","ArbPD"),log)
 
 # 2. Construct two simple linear models that assess the effect of  perch height and diameter--------
-  #Simple Log Linear Model
-  anole.log.lm <- lm(HTotal~SVL, anole.log)
-
   # Perch Height
   anole.log.ph.lm <- lm(HTotal~SVL+PH, anole.log)
   
@@ -89,18 +87,30 @@
   #Mutate anole.log to include phylogenetically best fit
   anole.log <- anole.log %>%
     mutate(phylo.res = residuals(pgls.BM.ph.pd))
-  #Plot 
-  anole.log %>%
-    dplyr::select(PH,ArbPD,res.ph,res.pd,phylo.res) %>%
-    pivot_longer(cols = c("res.ph", "res.pd", "phylo.res", "phylo.res"))%>%
-    print%>%
-    ggplot(aes(x(PH),y=value)) + geom_boxplot()
   
-  p.ph.pd.phylo <- anole.log%>%
-    ggplot(aes(x=PH,y = phylo.res)) +
+  # Facet Grid Plot of PH
+  p.ph.phylo <- anole.log %>%
+    dplyr::select(PH,res.ph,phylo.res) %>%
+    pivot_longer(cols = c("res.ph", "phylo.res"))%>%
+    print %>%
+    ggplot(aes(x = PH,y = value)) + 
     geom_boxplot() +
-    stat_summary(fun=mean, geom="point", size=3)
-  print(p.ph.pd.phylo)
+    facet_grid(name~.,scales = "free_y")+ylab("residual")
+
+  # Facet Grid Plot of ArbPD
+  p.pd.phylo <- anole.log %>% 
+    dplyr::select(ArbPD,res.pd,phylo.res) %>%
+    pivot_longer(cols = c("res.pd", "phylo.res"))%>%
+    print%>%
+    ggplot(aes(x = ArbPD,y = value)) + 
+    geom_boxplot() +
+    facet_grid(name~.,scales = "free_y") + ylab("residual")
+
+  # Plot both Facet Grids next to each other using cowplot package
+  plot_grid(p.ph.phylo,p.pd.phylo, labels = "AUTO")
+  
+  
+
   
 
 
