@@ -80,7 +80,9 @@
   # 4 -75.52571  0.000000 0.698551002
   
   # a phylogenetically corrected regression model that includes 
-  # Perch Height and Diameter with traits evolving under BM is the best fit
+  # Perch Height and Diameter with traits evolving under BM is the best fit.
+  # Both of the covariates together are a significant predictor of hindlimb 
+  # length in a phylogenetic context. 
   
 
 # 6. Produce a plot of your own design to concisely visualize effe --------
@@ -88,6 +90,11 @@
   anole.log <- anole.log %>%
     mutate(phylo.res = residuals(pgls.BM.ph.pd))
   #Plot 
+  anole.log %>%
+    dplyr::select(PH,ArbPD,res.ph,res.pd,phylo.res) %>%
+    pivot_longer(cols = c("res.ph", "res.pd", "phylo.res", "phylo.res"))%>%
+    print%>%
+    ggplot(aes(x(PH),y=value)) + geom_boxplot()
   
   p.ph.pd.phylo <- anole.log%>%
     ggplot(aes(x=PH,y = phylo.res)) +
