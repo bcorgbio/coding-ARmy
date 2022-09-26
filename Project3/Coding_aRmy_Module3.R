@@ -63,14 +63,13 @@
                       data= anole.log, method = 'ML')
 
 # 5.  Assess the fit of each of the three models using AICc and AICw --------
-  anole.phylo.aic <- AICc(pgls.BM, pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
+  anole.phylo.aic <- AICc(pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
   aicw(anole.phylo.aic$AICc)
 
   # fit     delta           w
-  # 1 -63.66118 11.864530 0.001852884
-  # 2 -64.77956 10.746149 0.003241168
-  # 3 -73.81081  1.714901 0.296354947
-  # 4 -75.52571  0.000000 0.698551002
+  # 1 -64.77956 10.746149 0.003241168
+  # 2 -73.81081  1.714901 0.296354947
+  # 3 -75.52571  0.000000 0.698551002
 
   # a phylogenetically corrected regression model that includes 
   # Perch Height and Diameter with traits evolving under BM is the best fit.
