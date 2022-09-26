@@ -68,8 +68,7 @@
   anole.phylo.aic <- MuMIn::AICc(pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
   aicw(anole.phylo.aic$AICc)
   
-  
-  # fit     delta           w
+  #      fit     delta           w
   # 1 -64.77956 10.746149 0.003241168
   # 2 -73.81081  1.714901 0.296354947
   # 3 -75.52571  0.000000 0.698551002
@@ -84,6 +83,7 @@
   #Mutate anole.log to include phylogenetically best fit
   anole.log <- anole.log %>%
     mutate(phylo.res = residuals(pgls.BM.ph.pd))
+  
   #Facet grid with phylo.res, res.ph, res.pd
   anole.log %>% 
     dplyr::select(Ecomorph2,res.ph,res.pd,phylo.res) %>%
