@@ -32,18 +32,19 @@
   anole.log.pd.lm <- lm(HTotal~SVL+ArbPD, anole.log)
 
 # 3. Explore how perch diameter and height affects Hindlimb-SVL relationship --------
-# Add Residuals
+  # Add Residuals
   anole.log <- anole.log %>%
     mutate(res.ph = residuals(anole.log.ph.lm), 
           res.pd = residuals(anole.log.pd.lm))
-
-# Effect of Perch Height on Hindlimb-SVL Pattern
+  #Effect of Perch Height and Diameter
   anole.log%>%
-    ggplot(aes(x=Ecomorph2,y=res.ph)) + geom_boxplot() 
-# Effect of Perch Diameter on Hindlimb-SVL Pattern
-  anole.log%>%
-    ggplot(aes(x=Ecomorph2,y=res.pd)) + geom_boxplot() 
-  
+    dplyr::select(Ecomorph2,res.ph,res.pd)%>%
+    pivot_longer(cols=c("res.ph","res.pd"))%>%
+    print%>%
+    ggplot(aes(x=Ecomorph2,y=value)) +
+    geom_boxplot() +
+    stat_summary(fun=mean, geom="point", size=3)+
+    facet_grid(name~.,scales = "free_y")+ylab("residual")
 
 # 4. Use a BM model of trait evolution and construct phylogenetic least squares models --------
   anole.tree <- read.tree("anole.tre")
