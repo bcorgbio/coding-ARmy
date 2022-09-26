@@ -46,7 +46,7 @@
 
 # 4. Use a BM model of trait evolution and construct phylogenetic least squares models --------
   anole.tree <- read.tree("anole.tre")
-
+  
   # A PGLS model with the hindlimb-SVL relationship + perch height
   pgls.BM.ph <- gls(HTotal~SVL + PH, 
                     correlation = corBrownian(1, phy = anole.tree, form =~Species), 
@@ -63,9 +63,10 @@
                       data= anole.log, method = 'ML')
 
 # 5.  Assess the fit of each of the three models using AICc and AICw --------
-  anole.phylo.aic <- AICc(pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
+  anole.phylo.aic <- AICc(pgls.BM, pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
   aicw(anole.phylo.aic$AICc)
-
+  
+  
   # fit     delta           w
   # 1 -64.77956 10.746149 0.003241168
   # 2 -73.81081  1.714901 0.296354947
