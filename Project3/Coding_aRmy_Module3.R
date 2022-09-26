@@ -75,8 +75,8 @@
 
   # a phylogenetically corrected regression model that includes 
   # Perch Height and Diameter with traits evolving under BM is the best fit.
-  # Both of the covariates together are a significant predictor of hindlimb 
-  # length in a phylogenetic context. 
+  # Both of the variables together are a significant predictor of hindlimb 
+  # length in a phylogenetic context. The model with both variables has a delta value of 0. 
 
 
 # 6. Produce a plot of your own design to concisely visualize effe --------
