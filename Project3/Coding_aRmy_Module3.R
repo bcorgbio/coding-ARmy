@@ -86,19 +86,19 @@
 
   # Facet Grid Plot of PH
   p.ph.phylo <- anole.log %>%
-    dplyr::select(PH,res.ph,phylo.res) %>%
+    dplyr::select(Ecomorph2,res.ph,phylo.res) %>%
     pivot_longer(cols = c("res.ph", "phylo.res"))%>%
     print %>%
-    ggplot(aes(x = PH,y = value)) + 
+    ggplot(aes(x = Ecomorph2,y = value)) + 
     geom_boxplot() +
     facet_grid(name~.,scales = "free_y")+ylab("residual")
 
   # Facet Grid Plot of ArbPD
   p.pd.phylo <- anole.log %>% 
-    dplyr::select(ArbPD,res.pd,phylo.res) %>%
+    dplyr::select(Ecomorph2,res.pd,phylo.res) %>%
     pivot_longer(cols = c("res.pd", "phylo.res"))%>%
     print%>%
-    ggplot(aes(x = ArbPD,y = value)) + 
+    ggplot(aes(x = Ecomorph2,y = value)) + 
     geom_boxplot() +
   facet_grid(name~.,scales = "free_y") + ylab("residual")
 
