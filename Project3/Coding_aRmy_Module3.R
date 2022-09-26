@@ -73,11 +73,12 @@
   # 2 -73.81081  1.714901 0.296354947
   # 3 -75.52571  0.000000 0.698551002
 
-  # a phylogenetically corrected regression model that includes 
+  # This is a phylogenetically corrected regression model that includes 
   # Perch Height and Diameter with traits evolving under BM is the best fit.
-  # Both of the variables together are a significant predictor of hindlimb 
-  # length in a phylogenetic context. The model with both variables has a delta value of 0. 
-
+  
+  # Based on using AICc and AICw, both of the variables together are a significant 
+  # predictor of hindlimb length in a phylogenetic context. The model with both 
+  # variables has a delta value of 0. 
 
 # 6. Produce a plot of your own design to concisely visualize effe --------
   #Mutate anole.log to include phylogenetically best fit
@@ -93,14 +94,3 @@
     geom_boxplot() +
     stat_summary(fun=mean, geom="point", size=3)+
     facet_grid(name~.,scales = "free_y") + ylab("residual")
-
-
-
-
-
-
-
-
-
-
-
