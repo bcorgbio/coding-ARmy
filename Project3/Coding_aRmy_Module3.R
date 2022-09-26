@@ -10,8 +10,7 @@
   library(phytools)
   library(viridis)
   library(MuMIn)
-  library(phangorn)
-  library(cowplot)})
+  library(phangorn)})
 
 # Load Data ---------------------------------------------------------------
   anole <- read_csv("anole.dat.csv")
