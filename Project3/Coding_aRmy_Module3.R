@@ -1,4 +1,4 @@
-# Module 3 Project - Coding aRmy
+# Module 3 Project - Coding aRmy (Justin L, Katherine Q, Liz A, Michael B)
 
 # Libraries ---------------------------------------------------------------
   suppressMessages({
@@ -63,7 +63,7 @@
                       data= anole.log, method = 'ML')
 
 # 5.  Assess the fit of each of the three models using AICc and AICw --------
-  anole.phylo.aic <- AICc(pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
+  anole.phylo.aic <- MuMIn::AICc(pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
   aicw(anole.phylo.aic$AICc)
 
   # fit     delta           w
