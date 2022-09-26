@@ -81,30 +81,19 @@
 
 
 # 6. Produce a plot of your own design to concisely visualize effe --------
-#Mutate anole.log to include phylogenetically best fit
+  #Mutate anole.log to include phylogenetically best fit
   anole.log <- anole.log %>%
     mutate(phylo.res = residuals(pgls.BM.ph.pd))
-
-  # Facet Grid Plot of PH
-  p.ph.phylo <- anole.log %>%
-    dplyr::select(Ecomorph2,res.ph,phylo.res) %>%
-    pivot_longer(cols = c("res.ph", "phylo.res"))%>%
-    print %>%
-    ggplot(aes(x = Ecomorph2,y = value)) + 
-    geom_boxplot() +
-    facet_grid(name~.,scales = "free_y")+ylab("residual")
-
-  # Facet Grid Plot of ArbPD
-  p.pd.phylo <- anole.log %>% 
-    dplyr::select(Ecomorph2,res.pd,phylo.res) %>%
-    pivot_longer(cols = c("res.pd", "phylo.res"))%>%
+  #Facet grid with phylo.res, res.ph, res.pd
+  anole.log %>% 
+    dplyr::select(Ecomorph2,res.ph,res.pd,phylo.res) %>%
+    pivot_longer(cols = c("res.ph","res.pd", "phylo.res"))%>%
     print%>%
     ggplot(aes(x = Ecomorph2,y = value)) + 
     geom_boxplot() +
-  facet_grid(name~.,scales = "free_y") + ylab("residual")
+    stat_summary(fun=mean, geom="point", size=3)+
+    facet_grid(name~.,scales = "free_y") + ylab("residual")
 
-  # Plot both Facet Grids next to each other using cowplot package
-  plot_grid(p.ph.phylo,p.pd.phylo, labels = "AUTO")
 
 
 
