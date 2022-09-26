@@ -57,7 +57,7 @@
                     correlation = corBrownian(1, phy = anole.tree, form =~Species), 
                     data= anole.log, method = 'ML')
 
-  # A PGSL model with the hindlimb-SVL relationship + perch height + perch diameter
+  # A PGLS model with the hindlimb-SVL relationship + perch height + perch diameter
   pgls.BM.ph.pd <- gls(HTotal~SVL + PH + ArbPD, 
                       correlation = corBrownian(1, phy = anole.tree, form =~Species), 
                       data= anole.log, method = 'ML')
