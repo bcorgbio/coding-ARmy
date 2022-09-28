@@ -88,7 +88,6 @@
   anole.log %>% 
     dplyr::select(Ecomorph2,res.ph,res.pd,phylo.res) %>%
     pivot_longer(cols = c("res.ph","res.pd", "phylo.res"))%>%
-    print%>%
     ggplot(aes(x = Ecomorph2,y = value)) + 
     geom_boxplot() +
     stat_summary(fun=mean, geom="point", size=3)+
