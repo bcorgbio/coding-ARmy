@@ -1,4 +1,4 @@
-# Module 3 Project - Coding aRmy
+# Module 3 Project - Coding aRmy (Justin L, Katherine Q, Liz A, Michael B)
 
 # Libraries ---------------------------------------------------------------
   suppressMessages({
@@ -10,8 +10,7 @@
   library(phytools)
   library(viridis)
   library(MuMIn)
-  library(phangorn)
-  library(cowplot)})
+  library(phangorn)})
 
 # Load Data ---------------------------------------------------------------
   anole <- read_csv("anole.dat.csv")
@@ -68,39 +67,28 @@
   anole.phylo.aic <- MuMIn::AICc(pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
   aicw(anole.phylo.aic$AICc)
   
-  
-  # fit     delta           w
+  #      fit     delta           w
   # 1 -64.77956 10.746149 0.003241168
   # 2 -73.81081  1.714901 0.296354947
   # 3 -75.52571  0.000000 0.698551002
 
-  # a phylogenetically corrected regression model that includes 
+  # This is a phylogenetically corrected regression model that includes 
   # Perch Height and Diameter with traits evolving under BM is the best fit.
-  # Both of the covariates together are a significant predictor of hindlimb 
-  # length in a phylogenetic context. 
-
+  
+  # Based on using AICc and AICw, both of the variables together are a significant 
+  # predictor of hindlimb length in a phylogenetic context. The model with both 
+  # variables has a delta value of 0. 
 
 # 6. Produce a plot of your own design to concisely visualize effe --------
   #Mutate anole.log to include phylogenetically best fit
   anole.log <- anole.log %>%
     mutate(phylo.res = residuals(pgls.BM.ph.pd))
+  
   #Facet grid with phylo.res, res.ph, res.pd
   anole.log %>% 
     dplyr::select(Ecomorph2,res.ph,res.pd,phylo.res) %>%
     pivot_longer(cols = c("res.ph","res.pd", "phylo.res"))%>%
-    print%>%
     ggplot(aes(x = Ecomorph2,y = value)) + 
     geom_boxplot() +
     stat_summary(fun=mean, geom="point", size=3)+
     facet_grid(name~.,scales = "free_y") + ylab("residual")
-
-
-
-
-
-
-
-
-
-
-
