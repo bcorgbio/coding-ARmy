@@ -36,7 +36,7 @@ The data sets obtained from @hagey2017there were log transformed and two linear 
 * PGLS model with the hindlimb-SVL relationship + perch diameter
 * PGLS model with the hindlimb-SVL relationship + perch height + perch diameter
 
-The fit of each model was assessed using AICc and AICw in order to determine whether one or both of the covariates is a significant predictor of hindlimb length in a phylogenetic context. A facet grid was produced in order to visualize the effect of perch height, perch diameter, and ecomorph on the hindlimb residuals of the best fitting PGLS model.
+The fit of each model was assessed using AICc and AICw in order to determine whether one or both of the covariates is a significant predictor of hindlimb length in a phylogenetic context. A facet grid was produced from the best fitting PGLS model in order to visualize the effect of perch height, perch diameter, and ecomorph on the hindlimb residuals.
 
 # Results
 
