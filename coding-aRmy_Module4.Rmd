@@ -21,7 +21,7 @@ library(knitr) #for knitting options
 
 # Introduction
 
-The purpose of this project was to determine whether hind limb length varies between ecomorphs within the genus *Anolis*. By using a phylogenetic tree of 46 species of anole lizards [@poe2017phylogenetic] and analyzing morphological and ecomorphological data of these species [@hagey2017there], it was determined that hind limb length varies with phylogenetic relationship, not simply allometry.
+The purpose of this project was to determine whether hindlimb length varies between ecomorphs within the genus *Anolis*. By using a phylogenetic tree of 46 species of anole lizards [@poe2017phylogenetic] and analyzing morphological and ecomorphological data of these species [@hagey2017there], it was determined that hind limb length varies with phylogenetic relationship, not simply allometry.
 
 <center>
 [![An anolis lizard](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)
@@ -29,6 +29,14 @@ The purpose of this project was to determine whether hind limb length varies bet
 
 
 # Methods
+
+The data sets obtained from @hagey2017there were log transformed and two linear models were constructed in order to assess the effect of perch height and diameter on hindlimb length. The residuals of these data were calculated and plotted against the discrete factors in order to discover how both perch diameter and height affect the hindlimb-SVL relationship.The anole phylogenetic tree from @poe2017phylogenetic was used to construct phylogenetic least squares models of the hindlimb-SVL relationships using all possible combinations of the two covariates: 
+
+* PGLS model with the hindlimb-SVL relationship + perch height
+* PGLS model with the hindlimb-SVL relationship + perch diameter
+* PGLS model with the hindlimb-SVL relationship + perch height + perch diameter
+
+The fit of each model was assessed using AICc and AICw in order to determine whether one or both of the covariates is a significant predictor of hindlimb length in a phylogenetic context. A facet grid was produced in order to visualize the effect of perch height, perch diameter, and ecomorph on the hindlimb residuals of the best fitting PGLS model.
 
 # Results
 
@@ -54,13 +62,13 @@ anole.log <- anole2%>%
 #PGLS under BM, no ecomorph
 pgls.BM1 <- gls(HTotal ~SVL, correlation = corBrownian(1,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
 
-#PGLS under BM, w ecomorph
+#PGLS under BM, with ecomorph
 pgls.BM2 <- gls(HTotal ~SVL * Ecomorph2, correlation = corBrownian(1,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
 
 #PGLS under OU, no ecomorph
 pgls.OU1 <- gls(HTotal ~SVL, correlation = corMartins(0,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
 
-#PGLS under OU, w, ecomorph
+#PGLS under OU, with ecomorph
 pgls.OU2 <- gls(HTotal ~SVL * Ecomorph2, correlation = corMartins(0,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
 ```
 
