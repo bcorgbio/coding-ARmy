@@ -22,12 +22,11 @@ library(knitr) #for knitting options
 
 # Introduction
 
-The purpose of this project was to determine whether hind limb length varies between ecomorphs within the genus *Anolis*. Using a phylogenetic tree of 46 species of anole lizards along with morphological and ecomorphological data of these species, it was determined that hind limb length varies with phylogenetic relationship, not simply allometry.
+The purpose of this project was to determine whether hind limb length varies between ecomorphs within the genus *Anolis*. Using a phylogenetic tree of 46 species of anole lizards along with morphological and ecomorphological data of these species [@hagey2017there], it was determined that hind limb length varies with phylogenetic relationship, not simply allometry.
 
 <center>
 [![An anolis lizard](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)
 </center>
-
 
 
 # Methods
