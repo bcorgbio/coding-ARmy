@@ -97,6 +97,13 @@ anole.log <- anole.log%>%
          res.pd=residuals(pgls.BM.pd))
 ```
 
+```{r, "Regression Plot of log-transformed Htotal vs SVL with points colored by Ecomorph2"}
+  anole.log%>%
+  ggplot(aes(HTotal,SVL,col=Ecomorph2))+geom_point()+geom_smooth(method="lm")
+
+```
+
+
 ```{r,"plot residuals", fig.cap="Boxplot of phylogenetically corrected hindlimb residuals versus anole ecomorph with perch height and diameter"}
 #plot residuals
 anole.log %>% 
@@ -110,6 +117,8 @@ anole.log %>%
 
 
 # Discussion
+
+Based on the AICc and AICw, it was determined that both perch height and diameter are significant predictors of hindlimb length in a phylogenetic context and the phylogenetically corrected hindlimb residuals that include perch height and diameter should be plotted to better understand the relationship between hindlimb length and SVL. 
 
 # Author Contributions
 
