@@ -75,6 +75,15 @@ anole.phylo.aic <- AICc(pgls.BM1,pgls.BM2,pgls.OU1,pgls.OU2)
 anole.phylow.aicw <- aicw(anole.phylo.aic$AICc)
 ```
 
+```{r, "Table of AIC values"}
+n.spec <- anole.log%>%
+  group_by(Ecomorph2)%>%
+  summarise(n.species=n())
+
+n.spec%>%
+  kable(caption = "Number of species within each anole ecormorph included in this study")
+```
+
 ```{r, "add residuals"}
 #add phylo-corrected residuals
 anole.log <- anole.log%>%
@@ -97,23 +106,4 @@ print(p.eco.phylo)
 
 # References
 
-@article{hagey2017there,
-  title={There’s more than one way to climb a tree: Limb length and microhabitat use in lizards with toe pads},
-  author={Hagey, Travis J and Harte, Scott and Vickers, Mathew and Harmon, Luke J and Schwarzkopf, Lin},
-  journal={PloS one},
-  volume={12},
-  number={9},
-  pages={e0184641},
-  year={2017}
-}
-
-@article{poe2017phylogenetic,
-  title={A Phylogenetic, Biogeographic, and Taxonomic study of all Extant Species of Anolis (Squamata; Iguanidae)},
-  author={Steven Poe, Adrián Nieto-montes de oca, Omar Torres-carvajal, Kevin De Queiroz, Julián A. Velasco, Brad Truett, Levi N. Gray, Mason J. Ryan, Gunther Köhler, Fernando Ayala-varela, Ian Latella},
-  journal={Systematic Biology},
-  volume={66},
-  issue={5},
-  pages={663-697},
-  year={2017}
-}
 

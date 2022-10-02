@@ -469,6 +469,48 @@ pgls.OU2 &lt;- gls(HTotal ~SVL * Ecomorph2, correlation = corMartins(0,phy = ano
 <pre class="r"><code>#AIC operations
 anole.phylo.aic &lt;- AICc(pgls.BM1,pgls.BM2,pgls.OU1,pgls.OU2)
 anole.phylow.aicw &lt;- aicw(anole.phylo.aic$AICc)</code></pre>
+<pre class="r"><code>n.spec &lt;- anole.log%&gt;%
+  group_by(Ecomorph2)%&gt;%
+  summarise(n.species=n())
+
+n.spec%&gt;%
+  kable(caption = &quot;Number of species within each anole ecormorph included in this study&quot;)</code></pre>
+<table>
+<caption>Number of species within each anole ecormorph included in this
+study</caption>
+<thead>
+<tr class="header">
+<th align="left">Ecomorph2</th>
+<th align="right">n.species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">crown-giant</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">grass-bush</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">trunk</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">trunk-crown</td>
+<td align="right">11</td>
+</tr>
+<tr class="odd">
+<td align="left">trunk-ground</td>
+<td align="right">13</td>
+</tr>
+<tr class="even">
+<td align="left">twig</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>#add phylo-corrected residuals
 anole.log &lt;- anole.log%&gt;%
   mutate(phylo.res=residuals(pgls.BM2))</code></pre>
@@ -491,21 +533,8 @@ ecomorph
 <div id="author-contributions" class="section level1">
 <h1>Author Contributions</h1>
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<p><span class="citation">(<strong>article?</strong>)</span>{hagey2017there,
-title={There’s more than one way to climb a tree: Limb length and
-microhabitat use in lizards with toe pads}, author={Hagey, Travis J and
-Harte, Scott and Vickers, Mathew and Harmon, Luke J and Schwarzkopf,
-Lin}, journal={PloS one}, volume={12}, number={9}, pages={e0184641},
-year={2017} }</p>
-<p><span class="citation">(<strong>article?</strong>)</span>{poe2017phylogenetic,
-title={A Phylogenetic, Biogeographic, and Taxonomic study of all Extant
-Species of Anolis (Squamata; Iguanidae)}, author={Steven Poe, Adrián
-Nieto-montes de oca, Omar Torres-carvajal, Kevin De Queiroz, Julián A.
-Velasco, Brad Truett, Levi N. Gray, Mason J. Ryan, Gunther Köhler,
-Fernando Ayala-varela, Ian Latella}, journal={Systematic Biology},
-volume={66}, issue={5}, pages={663-697}, year={2017} }</p>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-hagey2017there" class="csl-entry">
 Hagey, Travis J, Scott Harte, Mathew Vickers, Luke J Harmon, and Lin
