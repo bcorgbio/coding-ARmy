@@ -39,7 +39,7 @@ The fit of each model was assessed using AICc and AICw in order to determine whe
 
 # Results
 
-```{r,"load the data"}
+```{r,"load the data", include = FALSE}
 anole <- read_csv("anole.dat.csv")
 anole.eco <- read_csv("anole.eco.csv")
 anole.tree <- read.tree("anole.tre")
@@ -52,6 +52,7 @@ anole.log <- anole %>%
     na.omit()%>%
     mutate_at(c("SVL", "HTotal","PH","ArbPD"),log)
 ```
+
 
 ```{r, "PGLS models"}
 ### Use a BM model of trait evolution to construct phylogenetic least squares models:
@@ -91,22 +92,28 @@ n.spec %>%
 ```{r, "add residuals"}
 #add phylo-corrected residuals
 anole.log <- anole.log%>%
-  mutate(phylo.res=residuals(pgls.BM.ph.pd))
+  mutate(phylo.res=residuals(pgls.BM.ph.pd),
+         res.ph=residuals(pgls.BM.ph), 
+         res.pd=residuals(pgls.BM.pd))
 ```
 
-```{r,"plot residuals", fig.cap="Boxplot of phylogenetically corrected hindlimb residuals versus anole ecomorph"}
+```{r,"plot residuals", fig.cap="Boxplot of phylogenetically corrected hindlimb residuals versus anole ecomorph with perch height and diameter"}
 #plot residuals
-p.eco.phylo <- anole.log%>%
-ggplot(aes(x=Ecomorph2,y=phylo.res)) +geom_boxplot() +stat_summary(fun=mean, geom="point", size=3)
-
-print(p.eco.phylo)
-
+anole.log %>% 
+    dplyr::select(Ecomorph2,res.ph,res.pd,phylo.res) %>%
+    pivot_longer(cols = c("res.ph","res.pd", "phylo.res"))%>%
+    ggplot(aes(x = Ecomorph2,y = value)) + 
+    geom_boxplot() +
+    stat_summary(fun=mean, geom="point", size=3)+
+    facet_grid(name~.,scales = "free_y") + ylab("residual")
 ```
 
 
 # Discussion
 
 # Author Contributions
+
+Justin Lau - Questions 2,4,5,6
 
 # References
 
