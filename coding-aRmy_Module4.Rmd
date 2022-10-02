@@ -54,40 +54,44 @@ anole.log <- anole %>%
 ```
 
 ```{r, "PGLS models"}
-### phylogenetic GLS models
+### Use a BM model of trait evolution to construct phylogenetic least squares models:
 
-#PGLS under BM, no ecomorph
-pgls.BM1 <- gls(HTotal ~SVL, correlation = corBrownian(1,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
-
-#PGLS under BM, with ecomorph
-pgls.BM2 <- gls(HTotal ~SVL * Ecomorph2, correlation = corBrownian(1,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
-
-#PGLS under OU, no ecomorph
-pgls.OU1 <- gls(HTotal ~SVL, correlation = corMartins(0,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
-
-#PGLS under OU, with ecomorph
-pgls.OU2 <- gls(HTotal ~SVL * Ecomorph2, correlation = corMartins(0,phy = anole.tree,form=~Species),data = anole.log, method = "ML")
+  # A PGLS model with the hindlimb-SVL relationship + perch height
+  pgls.BM.ph <- gls(HTotal~SVL + PH, 
+                    correlation = corBrownian(1, phy = anole.tree, form =~Species), 
+                    data= anole.log, method = 'ML')
+  
+  # A PGLS model with the hindlimb-SVL relationship + perch diameter
+  pgls.BM.pd <- gls(HTotal~SVL + ArbPD, 
+                    correlation = corBrownian(1, phy = anole.tree, form =~Species), 
+                    data= anole.log, method = 'ML')
+  
+  # A PGLS model with the hindlimb-SVL relationship + perch height + perch diameter
+  pgls.BM.ph.pd <- gls(HTotal~SVL + PH + ArbPD, 
+                       correlation = corBrownian(1, phy = anole.tree, form =~Species), 
+                       data= anole.log, method = 'ML')
 ```
 
 ```{r, "AIC"}
 #AIC operations
-anole.phylo.aic <- AICc(pgls.BM1,pgls.BM2,pgls.OU1,pgls.OU2)
+anole.phylo.aic <- MuMIn::AICc(pgls.BM.ph, pgls.BM.pd, pgls.BM.ph.pd)
 anole.phylow.aicw <- aicw(anole.phylo.aic$AICc)
 ```
 
-```{r, "Table of AIC values"}
-n.spec <- anole.log%>%
-  group_by(Ecomorph2)%>%
-  summarise(n.species=n())
+```{r, "Table of AIC values using Kable"}
+n.spec <- anole.phylo.aic%>%
+  group_by(rownames(anole.phylo.aic))%>%
+  summarise(AIC = AICc)
+  
+n.spec %>%
+  kable(caption = "AIC Values for Various PGLS Models of the hindlimb- SVL relationship with Perch Height and Diameter")
 
-n.spec%>%
-  kable(caption = "Number of species within each anole ecormorph included in this study")
 ```
 
 ```{r, "add residuals"}
 #add phylo-corrected residuals
 anole.log <- anole.log%>%
-  mutate(phylo.res=residuals(pgls.BM2))
+  mutate(phylo.res=residuals(pgls.BM.ph.pd))
 ```
 
 ```{r,"plot residuals", fig.cap="Boxplot of phylogenetically corrected hindlimb residuals versus anole ecomorph"}
