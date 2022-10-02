@@ -27,7 +27,6 @@ The purpose of this project was to determine whether hindlimb length varies betw
 [![An anolis lizard](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)
 </center>
 
-
 # Methods
 
 The data sets obtained from @hagey2017there were log transformed and two linear models were constructed in order to assess the effect of perch height and diameter on hindlimb length. The residuals of these data were calculated and plotted against the discrete factors in order to discover how both perch diameter and height affect the hindlimb-SVL relationship.The anole phylogenetic tree from @poe2017phylogenetic was used to construct phylogenetic least squares models of the hindlimb-SVL relationships using all possible combinations of the two covariates: 
@@ -47,13 +46,11 @@ anole.tree <- read.tree("anole.tre")
 ```
 
 ```{r, "join, filter, mutate to log"}
-anole2 <- anole%>%
-left_join(anole.eco)%>%
-  filter(!Ecomorph%in%c("U","CH"))%>%
-  na.omit()
-
-anole.log <- anole2%>%
-  mutate_at(c("SVL", "HTotal","PH","ArbPD"),log)
+anole.log <- anole %>%
+    left_join(anole.eco)%>%
+    filter(!Ecomorph%in%c("U","CH"))%>%
+    na.omit()%>%
+    mutate_at(c("SVL", "HTotal","PH","ArbPD"),log)
 ```
 
 ```{r, "PGLS models"}
@@ -99,3 +96,24 @@ print(p.eco.phylo)
 # Author Contributions
 
 # References
+
+@article{hagey2017there,
+  title={There’s more than one way to climb a tree: Limb length and microhabitat use in lizards with toe pads},
+  author={Hagey, Travis J and Harte, Scott and Vickers, Mathew and Harmon, Luke J and Schwarzkopf, Lin},
+  journal={PloS one},
+  volume={12},
+  number={9},
+  pages={e0184641},
+  year={2017}
+}
+
+@article{poe2017phylogenetic,
+  title={A Phylogenetic, Biogeographic, and Taxonomic study of all Extant Species of Anolis (Squamata; Iguanidae)},
+  author={Steven Poe, Adrián Nieto-montes de oca, Omar Torres-carvajal, Kevin De Queiroz, Julián A. Velasco, Brad Truett, Levi N. Gray, Mason J. Ryan, Gunther Köhler, Fernando Ayala-varela, Ian Latella},
+  journal={Systematic Biology},
+  volume={66},
+  issue={5},
+  pages={663-697},
+  year={2017}
+}
+
