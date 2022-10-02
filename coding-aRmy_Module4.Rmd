@@ -21,7 +21,7 @@ library(knitr) #for knitting options
 
 # Introduction
 
-The purpose of this project was to determine whether hindlimb length varies between ecomorphs within the genus *Anolis*. This was accomplished via visualization techniques. By using a phylogenetic tree of 46 species of anole lizards [@poe2017phylogenetic] and analyzing morphological and ecomorphological data of these species [@hagey2017there], it was determined that hind limb length varies with phylogenetic relationship, not simply allometry. This project also served as a springboard to explore more sophisticated operations with `tidyverse` as well as an introduction to working with data that may have a relationship due to phylogeny. 
+The purpose of this project was to determine whether hindlimb length varies between ecomorphs within the genus *Anolis*. We utilized visualization techniques in order to accomplish yhis. By using a phylogenetic tree of 46 species of anole lizards [@poe2017phylogenetic] and analyzing morphological and ecomorphological data of these species [@hagey2017there], it was determined that hind limb length does vary with phylogenetic relationship, not simply allometry. This project also served as a springboard to explore more sophisticated operations with `tidyverse` as well as an introduction to working with data that may have a relationship due to phylogeny. 
 
 <center>
 [![An anolis lizard](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Green_anole.jpg/320px-Green_anole.jpg)
@@ -46,7 +46,6 @@ anole.tree <- read.tree("anole.tre")
 ```
 
 ```{r}
-
 # Join tables, filter, mutate to log
 anole.log <- anole %>%
     left_join(anole.eco)%>%
@@ -57,7 +56,6 @@ anole.log <- anole %>%
 
 ```{r, "PGLS models"}
 # Phylogenetic least squares models using a BM model of trait evolution
-
 # A PGLS model with the hindlimb-SVL relationship + perch height
 pgls.BM.ph <- gls(HTotal~SVL + PH,correlation = corBrownian(1, phy = anole.tree, form =~Species),data= anole.log, method = 'ML')
   
@@ -79,7 +77,6 @@ anole.phylow.aicw <- aicw(anole.phylo.aic$AICc)
 n.spec <- anole.phylo.aic%>%
   group_by(rownames(anole.phylo.aic))%>%
   summarise(AIC = AICc)
-
 n.spec%>%
   kable(caption = "AIC Values for Various PGLS Models of the hindlimb-SVL relationship with Perch Height and Diameter")
 ```
@@ -93,11 +90,9 @@ anole.log <- anole.log%>%
 ```
 
 ```{r, "Regression Plot of log-transformed HTotal vs. SVL with points colored by Ecomorph2"}
-
 # Plot log-transformed HTotal vs. SVL
 anole.log%>%
   ggplot(aes(HTotal,SVL,col=Ecomorph2))+geom_point()+geom_smooth(method="lm")
-
 ```
 
 ```{r,"plot residuals", fig.cap="Boxplot of phylogenetically-corrected hindlimb residuals vs. anole ecomorph with perch height and diameter"}
@@ -113,7 +108,7 @@ anole.log %>%
 
 # Discussion
 
-Based on the AICc and AICw, it was determined that both perch height and diameter are significant predictors of hindlimb length in a phylogenetic context and the phylogenetically corrected hindlimb residuals that include perch height and diameter should be plotted to better understand the relationship between hindlimb length and SVL. This was demonstrated by our PGLS models, which confirmed that placement under Brownian Motion shows that specific traits of the hindlimb-SVL relationship evolved randomly. Furthermore, the residual plot suggests that there is a significant influence on the hindlimb-SVL relationship by phylogeny. 
+Based on the AICc and AICw, it was determined that both perch height and diameter are significant predictors of hindlimb length in a phylogenetic context. To better understand the relationship between hindlimb length and SVL, the phylogenetically corrected hindlimb residuals that include perch height and diameter should be plotted. This was demonstrated by our PGLS models, which confirmed that placement under Brownian Motion shows that specific traits of the hindlimb-SVL relationship evolved randomly. Furthermore, the residual plot suggests that there is a significant influence on the hindlimb-SVL relationship by phylogeny. 
 
 # Author Contributions
 
@@ -123,6 +118,6 @@ Liz Asprinio - Introduction, Methods, Revisions
 
 Michael Britt - Introduction, Discussion, Revisions/Edits (Grammar)
 
+Katherine Quinlivan -  Introduction, Discussion, Edits and Tidying  
+
 # References
-
-
