@@ -53,7 +53,6 @@ anole.log <- anole %>%
     mutate_at(c("SVL", "HTotal","PH","ArbPD"),log)
 ```
 
-
 ```{r, "PGLS models"}
 ### Use a BM model of trait evolution to construct phylogenetic least squares models:
 
@@ -103,7 +102,6 @@ anole.log <- anole.log%>%
 
 ```
 
-
 ```{r,"plot residuals", fig.cap="Boxplot of phylogenetically corrected hindlimb residuals versus anole ecomorph with perch height and diameter"}
 #plot residuals
 anole.log %>% 
@@ -115,7 +113,6 @@ anole.log %>%
     facet_grid(name~.,scales = "free_y") + ylab("residual")
 ```
 
-
 # Discussion
 
 Based on the AICc and AICw, it was determined that both perch height and diameter are significant predictors of hindlimb length in a phylogenetic context and the phylogenetically corrected hindlimb residuals that include perch height and diameter should be plotted to better understand the relationship between hindlimb length and SVL. 
@@ -123,6 +120,7 @@ Based on the AICc and AICw, it was determined that both perch height and diamete
 # Author Contributions
 
 Justin Lau - Questions 2,4,5,6
+Liz Asprinio - Introduction, Methods 
 
 # References
 
