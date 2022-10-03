@@ -74,6 +74,7 @@ anole.phylow.aicw <- aicw(anole.phylo.aic$AICc)
 
 ```{r, fig.cap="AIC Values for Various PGLS Models of the hindlimb-SVL relationship with Perch Height and Diameter"}
 # Table of AIC values using Kable
+
 n.spec <- anole.phylo.aic%>%
   group_by(rownames(anole.phylo.aic))%>%
   summarise(AIC = AICc)
@@ -92,7 +93,7 @@ anole.log <- anole.log%>%
 ```{r, "Regression Plot of log-transformed HTotal vs. SVL with points colored by Ecomorph2"}
 # Plot log-transformed HTotal vs. SVL
 anole.log%>%
-  ggplot(aes(HTotal,SVL,col=Ecomorph2))+geom_point()+geom_smooth(method="lm")
+  ggplot(aes(SVL,HTotal,col=Ecomorph2))+geom_point()+geom_smooth(method="lm")
 ```
 
 ```{r,"plot residuals", fig.cap="Boxplot of phylogenetically-corrected hindlimb residuals vs. anole ecomorph with perch height and diameter"}
